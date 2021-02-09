@@ -61,16 +61,76 @@
                 // trim remove all extra white space
 
                 item.price = finalPrice;
-                
-                
 
-                console.log(item);
+                //console.log(item);
+
+                //create element which we will put inside the cart
+                const cartItem = document.createElement('div');
+
+                cartItem.classList.add(
+                    "cart-item", 
+                    "d-flex", 
+                    "justify-content-between", 
+                    "text-capitalize",
+                    "my-3"
+                    );
+
+                /* Template string `inside those backcomma` ... cartItem div classes 
+                and the rest of template string 
+                     copy pased from html  */
+                cartItem.innerHTML = ` 
+                    <img src="${item.img}" class="img-fluid rounded-circle" id="item-img" alt="">
+                    <div class="item-text">
+                        <p id="cart-item-title" class="font-weight-bold mb-0">${item.name}</p>
+                        <span>$</span>
+                        <span id="cart-item-price" class="cart-item-price" class="mb-0">${item.price}</span>
+                    </div>
+                    <a href="#" id='cart-item-remove' class="cart-item-remove">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    </div>
+                `;
+
+                //select cart
+                const cart = document.getElementById("cart");
+                const total = document.querySelector('.cart-total-container');
+                // .insertBefore('par which we want to insert', 'where we want the par insert')
+                cart.insertBefore(cartItem, total);
+                alert('item added to the cart');
+
+                showTotals();
 
 
             }
         })
     })
 
+    //show totals function
+    function showTotals() {
+        console.log("hi");
+        const total = [];
+        const items = document.querySelectorAll(".cart-item-price");
+
+        items.forEach(function(item) {
+            total.push(parseFloat(item.textContent));
+            //need to use parseFloat because without it we are getting a string   
+        });
+        //console.log(total)
+        /*reduce method - callback function with two par - total (which we are returning),
+            for every item we are looping through */
+        const totalMoney = total.reduce(function(total, item) {
+            total += item;
+            return total;
+        },0)
+        //total money return float but we want just 2 digits after comma -> toFixed function
+        const finalMoney = totalMoney.toFixed(2);
+
+        document.getElementById("cart-total").textContent = finalMoney;
+        document.querySelector(".item-total").textContent = finalMoney;
+        document.getElementById("item-count").textContent = total.length;
+
+        console.log(finalMoney);
+    }
 
 })();
 
