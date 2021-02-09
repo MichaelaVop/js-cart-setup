@@ -69,6 +69,7 @@
 
                 cartItem.classList.add(
                     "cart-item", 
+                    "itemToRemove",
                     "d-flex", 
                     "justify-content-between", 
                     "text-capitalize",
@@ -99,7 +100,7 @@
                 alert('item added to the cart');
 
                 showTotals();
-
+                removeItem();
 
             }
         })
@@ -110,7 +111,7 @@
         console.log("hi");
         const total = [];
         const items = document.querySelectorAll(".cart-item-price");
-
+    
         items.forEach(function(item) {
             total.push(parseFloat(item.textContent));
             //need to use parseFloat because without it we are getting a string   
@@ -124,14 +125,36 @@
         },0)
         //total money return float but we want just 2 digits after comma -> toFixed function
         const finalMoney = totalMoney.toFixed(2);
-
+    
         document.getElementById("cart-total").textContent = finalMoney;
         document.querySelector(".item-total").textContent = finalMoney;
         document.getElementById("item-count").textContent = total.length;
-
-        console.log(finalMoney);
+    
+        console.log("show money fun", finalMoney);
     }
+
+    function removeItem() {
+        const trashBtn = document.querySelectorAll(".cart-item-remove");
+        console.log("trashbt", trashBtn);
+        trashBtn.forEach(function(trash) {
+            trash.addEventListener('click', function(event) {
+                console.log("target", event.target);
+                //make sure the target is the trash icon - if statement
+                if (event.target.parentElement.classList.contains('cart-item-remove')) {
+                    //console.log("target", event.target.parentElement.parentElement);
+                    let itemToTrash = document.querySelector(".itemToRemove");
+                    itemToTrash.remove();
+                    // showTotals();
+                    // console.log("remove fun", showTotals);
+                }
+            });
+        });
+    
+        
+    };
 
 })();
 
-// stopped 34:38
+
+
+//select the item to remove
