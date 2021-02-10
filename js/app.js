@@ -135,43 +135,8 @@ function showTotals() {
 
     console.log("final money", finalMoney);
 }
-showTotals();
-function removeItem() {
-    const trashBtn = document.querySelectorAll(".cart-item-remove");
-    console.log("trashbt", trashBtn);
-    
-    trashBtn.forEach(function(trash) {
-        
-        //console.log("trash for each", trash);
-        trash.addEventListener('click', function(event) {
-            console.log("target", event.target);
-            //make sure the target is the trash icon - if statement
-            if (event.target.parentElement.classList.contains('cart-item-remove')) {
-                //console.log("target", event.target.parentElement.parentElement);
-                //let moveToTrash = {};
-                let itemToMove = event.target.parentElement.parentElement;
-                itemToMove.remove();
-                // return itemsInCart;
-                console.log("pokushokus");
-                //console.log("item to move", itemToMove);
-                // moveToTrash.push(itemToMove);
-                // return moveToTrash;
-                // itemsToRem.pop(moveToTrash);
-                // itemToMove.forEach(function(item){
-                //     moveToTrash.push(item.textContent);
-                 
-               
-                // })
-                // console.log("to trash", moveToTrash);
-                //document.querySelector(".itemToRemove")
-                //itemToTrash.remove();
-                // showTotals();
-                // console.log("remove fun", showTotals);
-            }
-        });
-    });
-    
-}    
+
+ 
 
 // (function() {
 //     const trashBtn = document.querySelectorAll(".cart-item-remove");

@@ -17,8 +17,7 @@ function removeItem() {
             }
         });
     });
-    newTotal();
-    
+   
 }   
 
 function newTotal() {
@@ -37,6 +36,8 @@ function newTotal() {
         total += item;
         return total;
     },0)
+
+
     //total money return float but we want just 2 digits after comma -> toFixed function
     const finalMoney = totalMoney.toFixed(2);
 
