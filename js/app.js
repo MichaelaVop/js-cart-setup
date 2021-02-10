@@ -33,6 +33,7 @@
                 let fullPath = event.target.parentElement.previousElementSibling.src;
                 let pos = fullPath.indexOf('img') + 3;
                 //console.log(pos);
+                // pos means position
                 /* we want to slice to get 'img' -> it is connected to '+ 3' 
                     in pos var (img is 3 characters string log)
                    slice function - first par = var where we want the function start, 
@@ -62,7 +63,7 @@
 
                 item.price = finalPrice;
 
-                //console.log(item);
+                console.log("item in cart", item);
 
                 //create element which we will put inside the cart
                 const cartItem = document.createElement('div');
@@ -101,60 +102,106 @@
 
                 showTotals();
                 removeItem();
-
             }
         })
     })
 
     //show totals function
-    function showTotals() {
-        console.log("hi");
-        const total = [];
-        const items = document.querySelectorAll(".cart-item-price");
     
-        items.forEach(function(item) {
-            total.push(parseFloat(item.textContent));
-            //need to use parseFloat because without it we are getting a string   
-        });
-        //console.log(total)
-        /*reduce method - callback function with two par - total (which we are returning),
-            for every item we are looping through */
-        const totalMoney = total.reduce(function(total, item) {
-            total += item;
-            return total;
-        },0)
-        //total money return float but we want just 2 digits after comma -> toFixed function
-        const finalMoney = totalMoney.toFixed(2);
-    
-        document.getElementById("cart-total").textContent = finalMoney;
-        document.querySelector(".item-total").textContent = finalMoney;
-        document.getElementById("item-count").textContent = total.length;
-    
-        console.log("show money fun", finalMoney);
-    }
-
-    function removeItem() {
-        const trashBtn = document.querySelectorAll(".cart-item-remove");
-        console.log("trashbt", trashBtn);
-        trashBtn.forEach(function(trash) {
-            trash.addEventListener('click', function(event) {
-                console.log("target", event.target);
-                //make sure the target is the trash icon - if statement
-                if (event.target.parentElement.classList.contains('cart-item-remove')) {
-                    //console.log("target", event.target.parentElement.parentElement);
-                    let itemToTrash = document.querySelector(".itemToRemove");
-                    itemToTrash.remove();
-                    // showTotals();
-                    // console.log("remove fun", showTotals);
-                }
-            });
-        });
-    
-        
-    };
-
 })();
 
+function showTotals() {
+    console.log("hi");
+    const total = [];
+    const items = document.querySelectorAll(".cart-item-price");
+
+    items.forEach(function(item) {
+        total.push(parseFloat(item.textContent));
+        //need to use parseFloat because without it we are getting a string   
+    });
+    //console.log(total)
+    /*reduce method - callback function with two par - total (which we are returning),
+        for every item we are looping through */
+    const totalMoney = total.reduce(function(total, item) {
+        total += item;
+        return total;
+    },0)
+    //total money return float but we want just 2 digits after comma -> toFixed function
+    const finalMoney = totalMoney.toFixed(2);
+
+    document.getElementById("cart-total").textContent = finalMoney;
+    document.querySelector(".item-total").textContent = finalMoney;
+    document.getElementById("item-count").textContent = total.length;
+
+    console.log("final money", finalMoney);
+}
+showTotals();
+function removeItem() {
+    const trashBtn = document.querySelectorAll(".cart-item-remove");
+    console.log("trashbt", trashBtn);
+    
+    trashBtn.forEach(function(trash) {
+        
+        //console.log("trash for each", trash);
+        trash.addEventListener('click', function(event) {
+            console.log("target", event.target);
+            //make sure the target is the trash icon - if statement
+            if (event.target.parentElement.classList.contains('cart-item-remove')) {
+                //console.log("target", event.target.parentElement.parentElement);
+                //let moveToTrash = {};
+                let itemToMove = event.target.parentElement.parentElement;
+                itemToMove.remove();
+                // return itemsInCart;
+                console.log("pokushokus");
+                //console.log("item to move", itemToMove);
+                // moveToTrash.push(itemToMove);
+                // return moveToTrash;
+                // itemsToRem.pop(moveToTrash);
+                // itemToMove.forEach(function(item){
+                //     moveToTrash.push(item.textContent);
+                 
+               
+                // })
+                // console.log("to trash", moveToTrash);
+                //document.querySelector(".itemToRemove")
+                //itemToTrash.remove();
+                // showTotals();
+                // console.log("remove fun", showTotals);
+            }
+        });
+    });
+    
+}    
+
+// (function() {
+//     const trashBtn = document.querySelectorAll(".cart-item-remove");
+//     console.log("trashbt", trashBtn);
+//     trashBtn.forEach(function(trash) {
+//         trash.addEventListener('click', function(event) {
+//             console.log("target", event.target);
+//             //make sure the target is the trash icon - if statement
+//             if (event.target.parentElement.classList.contains('cart-item-remove')) {
+//                 //console.log("target", event.target.parentElement.parentElement);
+//                 let moveToTrash = [];
+//                 let itemToMove = document.querySelectorAll(".itemToRemove");
+//                 console.log("item to move", itemToMove);
+
+//                 itemToMove.forEach(function(item){
+//                     moveToTrash.push(item.textContent);
+                    
+//                 })
+//                 console.log("to trash", moveToTrash);
+//                 //document.querySelector(".itemToRemove")
+//                 //itemToTrash.remove();
+//                 // showTotals();
+//                 // console.log("remove fun", showTotals);
+//             }
+//         });
+//     });
+
+//     //more like the show total function - get the target from the new array!
+    
+// }());
 
 
 //select the item to remove
